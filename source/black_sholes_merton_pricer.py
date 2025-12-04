@@ -1,6 +1,5 @@
 from typing import Optional
 import numpy as np
-import scipy
 from scipy import stats
 
 #Pricer for European options
@@ -36,7 +35,8 @@ class BlackSholes:
         """
         Compute the d2 parameter
         """
-        return (np.log(self.S0/self.K) + (self.R - self.vol**2 / 2) * self.T) / (self.vol * np.sqrt(self.T))
+        d1 = self.compute_d1()
+        return d1 - self.vol * np.sqrt(self.T)
 
     def compute_blackscholes(self):
         """

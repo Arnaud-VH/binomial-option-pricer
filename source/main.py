@@ -20,8 +20,5 @@ pricer_bs = BlackSholes(
 price_bs = pricer_bs.compute_blackscholes()
 option_tree = pricer_bt.price_european()
 
-for row in option_tree:
-   print(row)
-
 print(f"The final option price is {option_tree[0][0]:.4f}")
 print(f"The final option price is {price_bs:.4f}")

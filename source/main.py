@@ -1,5 +1,5 @@
 from binomial_option_pricer import BinomialOptionPricer
-from BlackSholesMerton_pricer import BlackSholes
+from black_sholes_merton_pricer import BlackSholes
 from real_world_data import RealWorldData
 
 ticker_input = "JNJ"

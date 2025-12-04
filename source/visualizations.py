@@ -14,8 +14,9 @@ S0_range = np.linspace(S0*0.6,S0*1.4, num= 100)
 pricer_bs_call = BlackSholes(S0 = S0, K=K, T=T, R = R, option_type="call", vol=vol)
 pricer_bs_put = BlackSholes(S0 = S0, K=K, T=T, R = R, option_type="put", vol=vol)
 
-price_series_call = []
+
 price_series_put = []
+price_series_call = []
 
 for S in S0_range:
     pricer_bs_call.S0 = S

@@ -48,7 +48,7 @@ class BinomialOptionPricer:
       #Need to check what the proper formula for the correct risk free rate is. 
       #self.R = (1 + self.R/self.n_steps)**1-1
       self.R = np.exp(self.R * self.T) - 1
-      print(self.R)
+      
       #Risk Neutral probabilities
       self.qu = (1 + self.R - self.down) / (self.up - self.down)
       self.qd = 1 - self.qu

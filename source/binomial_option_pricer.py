@@ -32,8 +32,6 @@ class BinomialOptionPricer:
       self.n_steps = n_steps
       self.option_type = option_type.lower()
       self.sigma = sigma
-      self.up = up
-      self.down = down
 
       #We need to check if either sigma or u and d are provided, initially just u and d
       #Compute the additional parameters based on the inputs
@@ -45,10 +43,12 @@ class BinomialOptionPricer:
       Compute the additional non-standard parameters for the binomial model. 
       """
       self.dt = self.T / self.n_steps
-      #Need to check what the proper formula for the correct risk free rate is. 
-      #self.R = (1 + self.R/self.n_steps)**1-1
-      self.R = np.exp(self.R * self.T) - 1
-      
+
+      self.R = np.exp(self.R * self.T/self.n_steps) - 1
+
+      self.up = np.exp(self.sigma * np.sqrt(self.dt))  
+      self.down = 1 / self.up  
+
       #Risk Neutral probabilities
       self.qu = (1 + self.R - self.down) / (self.up - self.down)
       self.qd = 1 - self.qu

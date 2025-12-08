@@ -7,7 +7,7 @@ R = 0.05
 S0 = 200
 vol = 0.1
 T=1
-K = 180
+K = 200
 
 S0_range = np.linspace(S0*0.6,S0*1.4, num= 100)
 

@@ -1,7 +1,5 @@
 import yfinance as yf
-import pandas as pd
 import numpy as np
-import matplotlib as plt
 
 class RealWorldData:
     """
@@ -18,7 +16,7 @@ class RealWorldData:
             ticker_input: Ticker of the stock
         """
         ticker = yf.Ticker(str(ticker_input))
-        df = ticker.history('max')
+        df = ticker.history('1d')
         df = df.drop(['Dividends', 'Stock Splits'], axis=1)
         S0 = df['Close'].iloc[-1]
 
@@ -32,9 +30,10 @@ class RealWorldData:
             ticker_input: Ticker of the stock
         """
         ticker = yf.Ticker(str(ticker_input))
-        df = ticker.history('max')
+        df = ticker.history('10y')
         df = df.drop(['Dividends', 'Stock Splits'], axis=1)
-
+        df = df.reset_index()
+        df['80MA'] = df['Close'].rolling(window=80).mean()
         return df
     
     #We want with this get the current risk free rate in the market:
@@ -60,7 +59,7 @@ class RealWorldData:
         """
 
         ticker = yf.Ticker(str(ticker_input))
-        df = ticker.history('max')
+        df = ticker.history('1y')
         df = df.drop(['Dividends', 'Stock Splits'], axis=1)
 
         #we need to check this

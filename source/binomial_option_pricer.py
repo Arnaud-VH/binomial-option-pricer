@@ -22,9 +22,6 @@ class BinomialOptionPricer:
    """
 
    def __init__(self, S0: float,K: float, T: float, R: float, n_steps: int, option_type: str, sigma: Optional[float] = None, up: Optional[float] = None, down: Optional[float] = None):
-      #Initialise the parameters. 
-      #Initially pre-determined but later we can implement market collected data or user input data. 
-      #Discuss that 
       self.S0 = S0
       self.K = K
       self.T = T
@@ -33,8 +30,6 @@ class BinomialOptionPricer:
       self.option_type = option_type.lower()
       self.sigma = sigma
 
-      #We need to check if either sigma or u and d are provided, initially just u and d
-      #Compute the additional parameters based on the inputs
       self.compute_parameters()
 
 

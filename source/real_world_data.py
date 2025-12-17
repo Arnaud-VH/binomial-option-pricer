@@ -71,4 +71,24 @@ class RealWorldData:
         vol = log_returns.std() * np.sqrt(252) 
 
         return vol
+    
+    def get_atm_strike(self, ticker_input):
+      stock = yf.Ticker(ticker_input)
+      current_price = stock.history(period='1d')['Close'].iloc[-1]
+      strike = round(current_price)
+      return strike
+    
+    def get_itm_strike(self, ticker_input, percent_itm=10):
+      current_price = self.get_current_price(ticker_input)
+      #Call ITM when price below
+      itm_call = round(current_price * (1-percent_itm/100))
+      #Put ITM when price above        
+      itm_put = round(current_price * (1 + percent_itm/100))
+      return itm_call, itm_put
 
+    def get_otm_strike(self, ticker_input, percent_otm=10):
+      current_price = self.get_current_price(ticker_input)
+      #Opposite as for in the money
+      otm_call = round(current_price * (1 + percent_otm/100))
+      otm_put = round(current_price * (1-percent_otm/100))
+      return otm_call, otm_put

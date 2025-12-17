@@ -42,7 +42,6 @@ class BlackSholes:
         """
         Compute the price of the european option according to the BSM
         """
-
         if self.option_type=="call":
             return self.S0 * stats.norm.cdf(self.compute_d1()) - self.K * np.exp(-self.R * self.T) * stats.norm.cdf(self.compute_d2())
  

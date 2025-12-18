@@ -33,7 +33,7 @@ class UserInterface:
 
    @staticmethod
    def _get_ticker():
-      print("\n Please enter the stock ticker symbol (e.g. NVDA, TSLA, JNJ): ")
+      print("\nPlease enter the stock ticker symbol (e.g. NVDA, TSLA, JNJ): ")
       while True:
          ticker_input = input("> ").upper().strip()
          if not UserInterface._validate_ticker(ticker_input):
@@ -54,13 +54,14 @@ class UserInterface:
       print("\nChoose option type:")
       print("1. Call option")
       print("2. Put option\n")
+      print("Enter 1 or 2:\n")
 
       while True:
-         choice = input("Enter 1 or 2: ").strip()
+         choice = input("> ").strip()
          if choice == "1":
-            return 'call'
+            return "call"
          elif choice == "2":
-            return 'put'
+            return "put"
          print("Invalid choice! Please enter 1 or 2.")
    
    @staticmethod
@@ -69,11 +70,12 @@ class UserInterface:
       print("1. ATM - At The Money (Strike close to current price)")
       print("2. ITM - In The Money (Favourable strike)")
       print("3. OTM - Out The Money (Unfavourable strike)\n")
+      print("Enter your choice as 1-3:\n")
 
       data = RealWorldData()
 
       while True:
-         choice = input("Enter your choice as 1-3:\n").strip()
+         choice = input("> ").strip()
 
          if choice == "1":
             strike = data.get_atm_strike(ticker)

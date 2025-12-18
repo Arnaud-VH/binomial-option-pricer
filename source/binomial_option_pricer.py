@@ -1,12 +1,13 @@
 """
 Binomial option pricing class.  
 """
+
 from typing import Optional
 import numpy as np
 
 class BinomialOptionPricer:
    """
-   Binomial option pricer supporting European and American options.  
+   Binomial option pricer supporting European.  
    
    Attributes:
       S0: Initial Stock Price
@@ -15,13 +16,22 @@ class BinomialOptionPricer:
       R: Risk-free interest rate
       n_steps: Number of steps in the binomial tree
       option_type: Either a Call option or a Put option
-      up: (Optional) probability of stock going up
-      down: (Optional) probability of stock going down
       sigma: (Optional) volatility
-      (div_yield (Extra to Implement)): Continuous dividend yield
    """
 
-   def __init__(self, S0: float,K: float, T: float, R: float, n_steps: int, option_type: str, sigma: Optional[float] = None, up: Optional[float] = None, down: Optional[float] = None):
+   def __init__(self, S0: float,K: float, T: float, R: float, n_steps: int, option_type: str, sigma: Optional[float] = None):
+      """
+      Initialize the Binomial Option Pricer class.
+
+      Parameters:
+         S0 (float): Initial price of stock.
+         K (float): Strike price of stock. 
+         T (float): Time till expiry. 
+         R (float): Risk free rate. 
+         n_steps (int): Number of steps in the binomial tree. 
+         option_type (str): Type of option being priced. Either Call or Put. 
+         sigma (float): Historical volatility of the stock.
+      """
       self.S0 = S0
       self.K = K
       self.T = T
@@ -35,7 +45,7 @@ class BinomialOptionPricer:
 
    def compute_parameters(self) -> None:
       """
-      Compute the additional non-standard parameters for the binomial model. 
+      Compute the additional non-standard parameters for the binomial model and set the appropriate attributes. 
       """
       self.dt = self.T / self.n_steps
 

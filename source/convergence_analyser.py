@@ -1,13 +1,30 @@
+"""
+Module containing the Converge Analyser class. Used to see how the Binomial Option Pricer's price converges to the Black-Scholes model's price as steps increase. 
+"""
+
 from black_sholes_merton_pricer import BlackSholes
 from binomial_option_pricer import BinomialOptionPricer
 import matplotlib.pyplot as plt
 
 class ConvergenceAnalyser:
    """
-   Need to also add the DocString. 
+   Displays a visualisation of how the Binomial Option Pricer's calculated price converges to the one calculated by the Black-Scholes model.  
    """
    @staticmethod
    def check_convergence(S0, K, T, R, sigma, option_type, max_steps=200, step_increment=5):
+      """
+      Computes binomial option price for different steps and creates a visualisation to show how the price converges to Black-Scholes price. 
+
+      Parameters:
+         S0 (float): Initial price of stock.
+         K (float): Strike price of stock. 
+         T (float): Time till expiry. 
+         R (float): Risk free rate. 
+         sigma (float): Historical volatility of the stock.
+         option_type (str): Type of option being priced. Either Call or Put. 
+         max_steps (int): Maximum number of steps that the Binomial Option Pricer will use to compute the price. 
+         step_increment (int): Increaser in steps for each iteration of computing the option's price. 
+      """
       pricer_bs = BlackSholes(S0, K, T, R, sigma, option_type)
       bs_price = pricer_bs.compute_blackscholes()
 

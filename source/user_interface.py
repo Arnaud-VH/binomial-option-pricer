@@ -1,9 +1,24 @@
+"""
+Module containing the UserInterface class. This class collects the user input by displaying some texts in the terminal and prompts the user for their input. 
+"""
+
 from real_world_data import RealWorldData
 import yfinance as yf
+
 class UserInterface:
+   """
+   Class containing the methods required to collect all necessary information from the user for stock, type of option and moneyness of the option they want. 
+   Contains only static methods as this class will not be instantiated. 
+   """
 
    @staticmethod
    def get_user_inputs():
+      """
+      Method that brings functionality together and calls other methods in class to collect user input. 
+
+      Returns:
+         inputs_dict (dict): Dictionary containing all user input and other data needed for the application. 
+      """
       print("=" * 50)
       print("Welcome to our Binomial Option Pricing Application.")
       print("=" * 50)
@@ -33,6 +48,12 @@ class UserInterface:
 
    @staticmethod
    def _get_ticker():
+      """
+      Private method that prompts the user to input the ticker of the stock. 
+
+      Returns:
+         ticker (str): The ticker input by the user. 
+      """
       print("\nPlease enter the stock ticker symbol (e.g. NVDA, TSLA, JNJ): ")
       while True:
          ticker_input = input("> ").upper().strip()
@@ -44,6 +65,15 @@ class UserInterface:
 
    @staticmethod
    def _validate_ticker(ticker):
+      """
+      Private method that ensures the ticker exists. 
+
+      Parameter: 
+         ticker (str): The ticker of the stock. 
+      
+      Returns:
+         bool: True if the ticker exists, False otherwise. 
+      """
       #Method to check if ticker exists found on Stack Overflow
       info = yf.Ticker(ticker).history(period = "7d", interval = "1d")
       return len(info) > 0
@@ -51,6 +81,12 @@ class UserInterface:
 
    @staticmethod
    def _get_option_type():
+      """
+      Private method which prompts the user to input the type of option they want to price. 
+
+      Returns:
+         option_type (str): The type of option. 
+      """
       print("\nChoose option type:")
       print("1. Call option")
       print("2. Put option\n")
@@ -66,6 +102,16 @@ class UserInterface:
    
    @staticmethod
    def _get_strike(ticker, option_type):
+      """
+      Private method that prompts the user to choose the moneyness of the option they want to price. 
+
+      Parameters:
+         ticker (str): The ticker of the stock who's option is being priced. 
+         option_type (str): Type of option being pricer. Call or Put. 
+
+      Returns:
+         strike (float): The strike price of the option at chosen moneyness. 
+      """
       print("\nSelect the moneyness of the option (strike price relative to current price):")
       print("1. ATM - At The Money (Strike close to current price)")
       print("2. ITM - In The Money (Favourable strike)")

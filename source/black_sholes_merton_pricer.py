@@ -35,7 +35,7 @@ class BlackSholes:
       self.R =R
       self.option_type = option_type.lower()
    
-   def compute_d1(self):
+   def _compute_d1(self):
       """
       Method that computes the value of d1. 
 
@@ -44,14 +44,14 @@ class BlackSholes:
       """
       return (np.log(self.S0/self.K) + (self.R + self.vol**2 / 2) * self.T)/(self.vol * np.sqrt(self.T))
    
-   def compute_d2(self):
+   def _compute_d2(self):
       """
       Method that computes the value of d2. 
 
       Returns:
          d2 (float): Computed d2 value. 
       """
-      d1 = self.compute_d1()
+      d1 = self._compute_d1()
       return d1 - self.vol * np.sqrt(self.T)
 
    def compute_blackscholes(self):
@@ -62,9 +62,9 @@ class BlackSholes:
          option_price (float): The price of the option. 
       """
       if self.option_type=="call":
-         return self.S0 * stats.norm.cdf(self.compute_d1()) - self.K * np.exp(-self.R * self.T) * stats.norm.cdf(self.compute_d2())
+         return self.S0 * stats.norm.cdf(self._compute_d1()) - self.K * np.exp(-self.R * self.T) * stats.norm.cdf(self._compute_d2())
 
       elif self.option_type=="put":
-         return self.K * np.exp(-self.R * self.T) * stats.norm.cdf(-self.compute_d2()) - self.S0 * stats.norm.cdf(-self.compute_d1())
+         return self.K * np.exp(-self.R * self.T) * stats.norm.cdf(-self._compute_d2()) - self.S0 * stats.norm.cdf(-self._compute_d1())
 
 

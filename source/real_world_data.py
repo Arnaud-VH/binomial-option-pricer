@@ -76,6 +76,7 @@ class RealWorldData:
       ticker = yf.Ticker(str(ticker_input))
       df = ticker.history('1y')
       df = df.drop(['Dividends', 'Stock Splits'], axis=1)
+      log_returns = np.log(df['Close'] / df['Close'].shift(1))
       vol = log_returns.std() * np.sqrt(252) 
       return vol
    

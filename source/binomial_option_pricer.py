@@ -2,7 +2,6 @@
 Binomial option pricing class.  
 """
 
-from typing import Optional
 import numpy as np
 
 class BinomialOptionPricer:
@@ -19,7 +18,7 @@ class BinomialOptionPricer:
       sigma: (Optional) volatility
    """
 
-   def __init__(self, S0: float,K: float, T: float, R: float, n_steps: int, option_type: str, sigma: Optional[float] = None):
+   def __init__(self, S0: float,K: float, T: float, R: float, n_steps: int, option_type: str, sigma: float):
       """
       Initialize the Binomial Option Pricer class.
 
